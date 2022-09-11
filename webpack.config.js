@@ -1,7 +1,8 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const GitignoreBuildWebpackPlugin = require('gitignore-build-webpack-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'), // можно убрать src из пути к файлам
@@ -19,6 +20,7 @@ module.exports = {
       favicon: './assets/favicon.ico',
     }),
     new CleanWebpackPlugin(),
+    new GitignoreBuildWebpackPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
