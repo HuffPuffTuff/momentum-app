@@ -1,13 +1,13 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
   context: path.resolve(__dirname, 'src'), // можно убрать src из пути к файлам
   mode: 'development',
   entry: {
     main: './js/index.js',  // убрали src так как есть context
-    analytics: './js/analytics.js',
   },
   output: {
     filename: '[name].[contenthash].js',
@@ -19,6 +19,18 @@ module.exports = {
       favicon: './assets/favicon.ico',
     }),
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './assets/sounds/*',
+          to: path.resolve(__dirname, 'dist'),
+        },
+        {
+          from: './assets/quotes.json',
+          to: path.resolve(__dirname, 'dist/assets'),
+        }
+      ]
+    }),
   ],
   module: {
     rules: [
